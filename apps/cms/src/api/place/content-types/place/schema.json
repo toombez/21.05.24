@@ -29,21 +29,19 @@
     },
     "latitude": {
       "type": "string",
-      "required": true,
-      "regex": "/ \\d+ /"
+      "required": true
     },
     "longitude": {
       "type": "string",
-      "regex": "/ \\d+ /",
       "required": true
     },
     "cover": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

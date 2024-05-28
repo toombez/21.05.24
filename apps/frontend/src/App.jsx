@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react"
+import PlaceCard from "./components/PlaceCard"
 
-function App() {
-  const [count, setCount] = useState(0)
+const BASE_CMS_URL = 'http://localhost:1337'
+const BASE_API_URL = BASE_CMS_URL + '/api'
+
+export default function App() {
+  const [places, setPlaces] = useState([])
+
+  useEffect(() => {
+    fetch(BASE_API_URL + "/places?populate=*")
+      .then((responce) => responce.json())
+      .then((rawData) => rawData.data
+        .map((rawPlace) => ({
+          id: rawPlace.id,
+          name: rawPlace.attributes.name,
+          latitude: rawPlace.attributes.latitude,
+          longitude: rawPlace.attributes.longitude,
+          coverURL: BASE_CMS_URL + rawPlace.attributes.cover.data.attributes.url,
+        }))
+      )
+      .then(setPlaces)
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)'
+      }}
+    >
+      {places.map((place) => (
+        <PlaceCard
+          key={place.id}
+          name={place.name}
+          id={place.id}
+          latitude={place.latitude}
+          longitude={place.longitude}
+          cover={place.coverURL}
+        />
+      ))}
+    </div>
   )
 }
-
-export default App

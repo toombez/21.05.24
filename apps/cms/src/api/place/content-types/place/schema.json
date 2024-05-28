@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "places",
+  "info": {
+    "singularName": "place",
+    "pluralName": "places",
+    "displayName": "Place",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "latitude": {
+      "type": "string",
+      "required": true
+    },
+    "longitude": {
+      "type": "string",
+      "required": true
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

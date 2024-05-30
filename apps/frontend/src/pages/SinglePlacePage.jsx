@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { BASE_API_URL, BASE_CMS_URL } from "../assets/js/constants"
+import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 
 function SinglePlacePage() {
     const id = useParams().id
@@ -51,6 +52,8 @@ function SinglePlacePage() {
                     <h1>
                         {place.name}
                     </h1>
+
+                    <BlocksRenderer content={place.description} />
 
                     <div
                         style={{

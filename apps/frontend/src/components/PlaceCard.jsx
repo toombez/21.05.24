@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function PlaceCard({
     name,
     cover,
@@ -26,12 +28,12 @@ export default function PlaceCard({
             <h3>
                 { name }
             </h3>
-            <a href={`geo:${latitude},${longitude}`}>
+            <Link to={`geo:${latitude},${longitude}`}>
                 Посмотреть на карте
-            </a>
-            <a href={`/place/${id}`}>
+            </Link>
+            <Link to={`/place/${id}`}>
                 Подробнее
-            </a>
+            </Link>
         </div>
     )
 }
